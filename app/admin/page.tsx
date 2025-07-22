@@ -41,7 +41,14 @@ export default function AdminPage() {
     }
   ]);
 
-  const [newEpisode, setNewEpisode] = useState({
+  const [newEpisode, setNewEpisode] = useState<{
+    title: string;
+    description: string;
+    audioFile: File | null;
+    coverImage: File | null;
+    category: string;
+    tags: string;
+  }>({
     title: '',
     description: '',
     audioFile: null,

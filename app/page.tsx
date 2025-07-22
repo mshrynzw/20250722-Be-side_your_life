@@ -141,7 +141,7 @@ const podcastData = [
     type: 'featured',
     title: 'Newsletter Signup',
     description: 'Get weekly episode summaries and exclusive behind-the-scenes content delivered to your inbox.',
-    type: 'newsletter',
+    contentType: 'newsletter',
     subscribers: '12.5k',
     height: 'h-56'
   },
@@ -209,7 +209,7 @@ export default function PodcastHomepage() {
     if (selectedCategory !== 'All') {
       filtered = filtered.filter(item => 
         item.category === selectedCategory || 
-        (selectedCategory === 'Recent' && ['1 day ago', '2 days ago', '3 days ago'].includes(item.publishDate)) ||
+        (selectedCategory === 'Recent' && item.publishDate && ['1 day ago', '2 days ago', '3 days ago'].includes(item.publishDate)) ||
         (selectedCategory === 'Popular' && item.type === 'episode')
       );
     }
@@ -333,7 +333,7 @@ export default function PodcastHomepage() {
             {host.bio}
           </p>
           <div className="flex flex-wrap gap-2 justify-center mb-4">
-            {host.expertise.map((skill, index) => (
+            {host.expertise.map((skill: string, index: number) => (
               <Badge key={index} variant="outline" className="text-xs">
                 {skill}
               </Badge>
